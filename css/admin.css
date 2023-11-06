@@ -1,0 +1,45 @@
+.borde_form{
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+
+
+
+.opciones{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Estilos para hacer la tabla responsive en tamaños de celular */
+@media (max-width: 767px) {
+    /* Hacer que las filas de la tabla se muestren como bloques */
+    .table-responsive tbody tr {
+        display: block;
+    }
+
+    /* Estilo para las celdas de la tabla */
+    .table-responsive tbody td {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+
+    /* Ocultar las etiquetas de encabezado */
+    .table-responsive thead {
+        display: none;
+    }
+
+    /* Estilo para las celdas de la tabla */
+    .table-responsive tbody td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: inline-block;
+        width: 100px; /* Ajusta el ancho según tu diseño */
+    }
+}

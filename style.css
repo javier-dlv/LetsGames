@@ -1,0 +1,39 @@
+/*HEADER*/
+ nav{
+    background-color: blueviolet;
+}
+
+.logo {
+    height: 100px;
+}
+
+.items-menu{
+    font-size: calc(1em + 0.5vw);
+}
+
+.img-principal{
+    max-height: 350px;
+}
+
+.card-principal{
+    border: 2px solid black;
+}
+
+
+.imagen {
+    width: 70%;
+}
+
+/*TABLA*/
+.tabla-centrada {
+    border-collapse: collapse;
+    width: 100%; /* Ajusta el ancho según tus necesidades */
+}
+
+.tabla-centrada th,
+.tabla-centrada td {
+    padding: 10px; /* Ajusta el espaciado interno según tus necesidades */
+    text-align: center; /* Centra horizontalmente el contenido */
+    vertical-align: middle; /* Centra verticalmente el contenido */
+    border: 1px solid #000; /* Añade bordes a las celdas, ajusta el estilo según tus necesidades */
+}
