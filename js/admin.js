@@ -1,5 +1,5 @@
 let main = document.getElementById("main")
-let cuerpoTabla = document.getElementById("cuerpo-tabla")
+let acordion = document.getElementById("accordionExample")
 
 
 let juegos = JSON.parse(localStorage.getItem("juegos")) || []
@@ -35,23 +35,47 @@ const crearProducto = (event) => {
 //CARGAR TABLA
 const cargarTabla = () => {
 
-  cuerpoTabla.innerHTML=""
-     juegos.forEach(juego=>{
-     let cuerpoTabla2 = document.createElement("tr")
-     let infoJuego = ` <th scope ="row">${juego.id}</th>
-     <td scope ="col">${juego.nombre}</td>
-     <td scope ="col">${juego.descripcion}</td>
-     <td scope ="col">${juego.categoria}</td>
-     <td scope ="col">
-      <div class="opciones">
-      <i class="fa-solid fa-pen-to-square fa-xl"></i>
-      <i class="fa-solid fa-trash fa-xl"></i>
-      <i class="fa-regular fa-heart fa-xl"></i>
-      </div>
-     </td>`
+  acordion.innerHTML=""
+  juegos.forEach((juego, index) => {
+    let cuerpoTabla2 = document.createElement("div");
+    let idUnico = `collapse${index}`; // Genera un identificador único
 
+    let infoJuego = `
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#${idUnico}" aria-expanded="false" aria-controls="${idUnico}">
+                    ${juego.nombre}
+                </button>
+            </h2>
+            <div id="${idUnico}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Codigo: <h5>${juego.id}</h5>
+                    <hr/>
+                    Descripcion: <h5>${juego.descripcion}</h5>
+                    <hr/>
+                    Categoria: <h5>${juego.categoria}</h5>
+                    <hr/>
+                    Precio: <h5>${juego.precio} usd</h5> 
+                    <hr/>
+                    <div class="opciones">
+                    <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-pen-to-square fa-xl"></i><p class="align-items-center mb-0">Editar</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                    <i class="fa-solid fa-trash fa-xl"></i><p class="align-items-center mb-0">Eliminar</p>
+                    </div>
+                    <div class="d-flex align-items-center">
+                    <i class="fa-regular fa-heart fa-xl"></i> <p class="align-items-center mb-0">Añadir a favoritos</p>
+                    </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+       <hr/>
+     `
      cuerpoTabla2.innerHTML=infoJuego
-     cuerpoTabla.append(cuerpoTabla2)
+     acordion.append(cuerpoTabla2)
    });
 
 }

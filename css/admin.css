@@ -1,19 +1,29 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .borde_form{
     padding: 20px;
-    border: 1px solid black;
+    border: 1.5px solid rgb(0, 0, 0);
     border-radius: 10px;
 }
 
 
+.accordion-button{
+    background-color: rgb(113, 113, 248);
+    color: white;
+}
 
-
+.form-control{
+    border: 1px solid black;
+}
 
 .opciones{
     cursor: pointer;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 

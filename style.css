@@ -1,6 +1,10 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 /*HEADER*/
  nav{
-    background-color: blueviolet;
+    background-color: #FFBB5C;
 }
 
 .logo {
@@ -24,16 +28,49 @@
     width: 70%;
 }
 
-/*TABLA*/
+/*TARJETAS*/
+
+.cont-img{
+    height: 50%;
+}
+
+.img-card{
+    height: 100%;
+}
+
+.card-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.card-body a{
+    background-color: #FFBB5C;
+}
+
+.card-body a:hover{
+    background-color: #FFBB5C;
+}
+
+
+.todos-juegos{
+    background-color: #FFBB5C;
+}
+
+.todos-juegos:hover{
+    background-color: #FFBB5C;
+
+}
+/*TABLA
 .tabla-centrada {
     border-collapse: collapse;
-    width: 100%; /* Ajusta el ancho según tus necesidades */
+    width: 100%; /* Ajusta el ancho según tus necesidades 
 }
 
 .tabla-centrada th,
 .tabla-centrada td {
-    padding: 10px; /* Ajusta el espaciado interno según tus necesidades */
-    text-align: center; /* Centra horizontalmente el contenido */
-    vertical-align: middle; /* Centra verticalmente el contenido */
-    border: 1px solid #000; /* Añade bordes a las celdas, ajusta el estilo según tus necesidades */
-}
+    padding: 10px;  Ajusta el espaciado interno según tus necesidades 
+    text-align: center;  Centra horizontalmente el contenido 
+    vertical-align: middle;  Centra verticalmente el contenido 
+    border: 1px solid #000; Añade bordes a las celdas, ajusta el estilo según tus necesidades 
+}*/
