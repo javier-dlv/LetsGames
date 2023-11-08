@@ -69,6 +69,9 @@ const cargarTabla = () => {
                     </div>
                     </div>
                     <hr/>
+                    <div>
+                    <button type="button" class="btn btn-outline-danger" onclick="añadirARecomendados(${index})">${juego.recomendado ? "Quitar de recomendados" : "Añadir a recomendados"}</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,5 +82,20 @@ const cargarTabla = () => {
    });
 
 }
+
+
+
+const añadirARecomendados = (index) => {
+  
+    if (recomendados.length >= 6 && juegos[index].recomendado == false) {
+        alert("No tiene mas espacio para agregar a recomendados")
+    } else {
+        juegos[index].recomendado = !juegos[index].recomendado;
+        localStorage.setItem("juegos",JSON.stringify(juegos))
+        cargarTabla()
+    }
+    
+}
+
 
 cargarTabla()
