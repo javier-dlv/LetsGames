@@ -13,7 +13,8 @@ class Juego {
 
 let juegosTotales = []
 
-let recomendados = JSON.parse(localStorage.getItem("recomendados")) || []
+ let recomendados = JSON.parse(localStorage.getItem("recomendados")) || []
+ let principal = JSON.parse(localStorage.getItem("principal")) || []
 
 
 const mostrarJuegosRecomendados = () => {
@@ -26,7 +27,7 @@ const mostrarJuegosRecomendados = () => {
 
 recomendados.forEach(juego => {
     let columna = document.createElement("div")
-    columna.classList="col-12 col-md-3 mb-3"
+    columna.classList="col-12 col-md-3 mb-3 justify-content-center d-flex"
 
     let cardJuego = `<div class="card h-100" style="width: 18rem;">
     <div class="cont-img">
@@ -42,4 +43,37 @@ recomendados.forEach(juego => {
   columna.innerHTML=cardJuego
   juegosRecomendados.append(columna )
 });
+}
+
+const juegoPrincipal = () => {
+  let principalJuego = juegos.filter((juego)=> {
+    return juego.destacado == true
+  })
+
+  localStorage.setItem("principal",JSON.stringify(principalJuego))
+  JSON.parse(localStorage.getItem("principal"))
+
+  principal.forEach((juego=>{
+   let columna = document.createElement("div")
+   columna.classList=" d-none d-md-flex"
+   let contenido = `
+   <div class="col-md-6">
+     <div class="img-principal">
+         <img src="${juego.imagen}" class="imagen" alt="${juego.nombre}">
+     </div>
+ </div>
+ <div class="col-md-6 bg-dark card-pricipal-body">
+     <div class="text-light ms-3 card-pricipal-body">
+         <h4 class="mt-4">${juego.nombre}</h4>
+         <h4 class="mt-4">${juego.categoria}</h4>
+         <p class="mt-4">${juego.descripcion}</p>
+         <div class="d-flex justify-content-center">
+         <button type="button" class="btn btn btn-outline-light mb-1">Ver detalle</button>
+         </div>
+         </div>
+ </div>
+ `
+ columna.innerHTML=contenido
+ cardPrincipal.append(columna)
+  }))
 }

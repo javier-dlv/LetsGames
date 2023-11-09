@@ -4,7 +4,6 @@ let acordion = document.getElementById("accordionExample")
 
 let juegos = JSON.parse(localStorage.getItem("juegos")) || []
 
-
 //CREAR EL PRODUCTO
 const crearProducto = (event) => {
   event.preventDefault()
@@ -69,8 +68,9 @@ const cargarTabla = () => {
                     </div>
                     </div>
                     <hr/>
-                    <div>
+                    <div class="d-flex gap-3">
                     <button type="button" class="btn btn-outline-danger" onclick="añadirARecomendados(${index})">${juego.recomendado ? "Quitar de recomendados" : "Añadir a recomendados"}</button>
+                    <button type="button" class="btn btn-outline-danger" onclick="destacarJuego(${index})">${juego.destacado ? "Quitar destacado" : "Destacar juego"}</button>
                     </div>
                 </div>
             </div>
@@ -87,7 +87,7 @@ const cargarTabla = () => {
 
 const añadirARecomendados = (index) => {
   
-    if (recomendados.length >= 6 && juegos[index].recomendado == false) {
+    if (recomendados.length >= 5 && juegos[index].recomendado == false) {
         alert("No tiene mas espacio para agregar a recomendados")
     } else {
         juegos[index].recomendado = !juegos[index].recomendado;
@@ -96,6 +96,12 @@ const añadirARecomendados = (index) => {
     }
     
 }
+
+const destacarJuego = (index) => {    
+        juegos[index].destacado = !juegos[index].destacado;
+        localStorage.setItem("juegos",JSON.stringify(juegos))
+        cargarTabla()
+  }
 
 
 cargarTabla()
