@@ -18,11 +18,12 @@
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item mb-2 mb-md-0">
-                    <a class="nav-link text-light items-menu" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <ul class="navbar-nav me-auto d-flex align-items-center mb-lg-0">
+                  <li class="nav-item mb-2 mb-md-0 items-menu text-light cursor"  onclick="verCategorias()">
+                    Ver mis categorias
+                  </li>
+                  <li class="nav-item mb-2 mb-md-0 ms-md-2 items-menu text-light  cursor" onclick="crearCategoria()">
                       Crear categoria
-                    </a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link text-light items-menu" href="#" aria-disabled="true">Favoritos</a>
@@ -86,11 +87,7 @@
                     id="categoria"
                     >
                     <option selected>Seleccione una Categoria</option>
-                    <option value="Accion">Accion</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Deportes">Deporte</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Estrategia">Estrategia</option>
+                    
                   </select>
                 </div>
 
@@ -120,6 +117,17 @@
                 </div>
               </div>
 
+              <div class="row mb-2">
+                <div class="col">
+                  <textarea 
+                  class="form-control"
+                  id="descripcion" 
+                  placeholder="Ingrese descripcion del juego" 
+                  rows="5"
+                  required></textarea>
+                </div>
+              </div>
+
               <div class="row">
                 <div class="col d-flex justify-content-end">
                   <button class="btn btn-dark">Guardar</button>
@@ -140,6 +148,66 @@
     </main>
 
     <footer></footer>
+
+    <!--MODAL-->
+    <div class="modal" tabindex="-1" id="modal-categoria">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Creando categoria</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-2">
+              <div class="col">
+                <label>Nombre de la categoria</label>
+                <input type="text"
+                class="form-control"
+                placeholder="Ingresar nombre"
+                required
+                id="nombre-categoria"
+                >
+              </div>
+            </div>  
+
+            <div class="row mb-2">
+              <div class="col">
+                <textarea 
+                class="form-control"
+                id="descripcion-categoria" 
+                placeholder="Ingrese descripcion de la categoria" 
+                rows="5"
+                required></textarea>
+              </div>
+            </div>
+            </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="crearCategoria()">Guardar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scrollable modal -->
+    <div class="modal modal-dialog-scrollable" tabindex="-1" id="modal-categorias">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Mis categorias</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="categorias-modal">
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-primary">Nueva categoria</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
 
 
     <script src="https://kit.fontawesome.com/5629cd02e0.js" crossorigin="anonymous"></script>

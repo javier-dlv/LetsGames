@@ -11,8 +11,17 @@ class Juego {
     }
 }
 
-let juegosTotales = []
+class Categoria {
+  constructor(id,nombre,descripcion){
+    this.id=id
+    this.nombre=nombre
+    this.descripcion=descripcion
+  }
+}
 
+ //let juegosTotales = [] 
+ //let categorias = []
+ 
  let recomendados = JSON.parse(localStorage.getItem("recomendados")) || []
  let principal = JSON.parse(localStorage.getItem("principal")) || []
 

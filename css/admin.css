@@ -2,6 +2,10 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.puntero{
+    cursor: pointer;
+}
+
 .borde_form{
     padding: 20px;
     border: 1.5px solid rgb(0, 0, 0);
