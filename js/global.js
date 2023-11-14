@@ -21,10 +21,13 @@ class Categoria {
 
  //let juegosTotales = [] 
  //let categorias = []
+
+ let selectCategoria = document.getElementById("categoria")
+
  
  let recomendados = JSON.parse(localStorage.getItem("recomendados")) || []
  let principal = JSON.parse(localStorage.getItem("principal")) || []
-
+ let categorias = JSON.parse(localStorage.getItem("categorias")) || []
 
 const mostrarJuegosRecomendados = () => {
   let recomendadosJuegos = juegos.filter((juego)=> {
@@ -86,3 +89,108 @@ const juegoPrincipal = () => {
  cardPrincipal.append(columna)
   }))
 }
+
+
+const agregarASelectCategoria = () => {
+
+categorias.forEach((categoria)=>{
+  let opcionCategoria =document.createElement("option")
+  opcionCategoria.value= categoria.nombre
+  opcionCategoria.innerText=categoria.nombre
+  selectCategoria.append(opcionCategoria)
+})
+}
+
+const crearCategoria = () => {
+  myModal.show()
+
+  let idCategoria = new Date().getTime()
+  let nombre = document.getElementById("nombre-categoria").value
+  let descripcion = document.getElementById("descripcion-categoria").value
+
+  if (nombre !== "" && descripcion !== "" ) {
+  let categoria = new Categoria(idCategoria,nombre,descripcion)
+  categorias.push(categoria)
+  let categoriasGuardadas = JSON.parse(localStorage.getItem("categorias")) || [];
+  categoriasGuardadas.push(categoria);
+  localStorage.setItem("categorias", JSON.stringify(categoriasGuardadas));
+
+  document.getElementById("nombre-categoria").value=""
+  document.getElementById("descripcion-categoria").value=""
+
+  selectCategoria.innerText=""
+agregarASelectCategoria()
+
+  }  
+}
+
+const verCategorias = () => {
+
+  let modalCategorias = document.getElementById("categorias-modal")
+  myModal2.show()
+  document.getElementById("categorias-modal").innerText=""
+  categorias.forEach((categoria)=>{
+      let contenedor = document.createElement("div")
+      let contenido = `
+      <div class="d-flex mb-2 justify-content-between">
+      <h5> ${categoria.nombre} </h5>
+      <div class="d-flex align-items-center">
+      <i class="fa-solid fa-trash fa-xl puntero" onclick="eliminarProducto(${categoria.id},${0})"></i><p class="align-items-center mb-0">Eliminar categoria</p>
+      </div>
+      </div>
+      <hr/>
+      `
+      contenedor.innerHTML=contenido
+      modalCategorias.append(contenedor)
+  })
+}
+
+const eliminarProducto = (id,numero) => {
+
+  if (numero === 0) {
+     let posicion =  categorias.findIndex((categoria)=>{
+          return categoria.id === id
+      })
+
+      categorias.splice(posicion,1)
+      localStorage.setItem("categorias",JSON.stringify(categorias))
+      verCategorias()
+
+  } else if(numero === 1) {
+     let pos = juegos.findIndex((juego)=>{
+          return juego.id === id
+      })
+
+      juegos.splice(pos,1)
+      localStorage.setItem("juegos",JSON.stringify(juegos))
+      cargarTabla()
+  }
+
+}
+
+const listarCategorias = () => {
+  categorias.forEach((categoria)=>{
+    let columna = document.createElement("div")
+    columna.classList="col"
+
+    let cardCategoria = `  <div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="$}" class="img-fluid rounded-start" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+  </div>`
+
+  columna.innerHTML= cardCategoria
+  contenedorCategorias.append(columna)
+  })
+}
+
+agregarASelectCategoria()

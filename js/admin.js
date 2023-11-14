@@ -1,20 +1,11 @@
 let main = document.getElementById("main")
 let acordion = document.getElementById("accordionExample")
-let selectCategoria = document.getElementById("categoria")
 const myModal = new bootstrap.Modal(document.getElementById('modal-categoria'))
 const myModal2 = new bootstrap.Modal(document.getElementById('modal-categorias'))
-
-
 let juegos = JSON.parse(localStorage.getItem("juegos")) || []
-let categorias = JSON.parse(localStorage.getItem("categorias")) || []
 
 
-categorias.forEach((categoria)=>{
-    let opcionCategoria =document.createElement("option")
-    opcionCategoria.value= categoria.nombre
-    opcionCategoria.innerText=categoria.nombre
-    selectCategoria.append(opcionCategoria)
-  })
+
 //CREAR EL PRODUCTO
 const crearProducto = (event) => {
   event.preventDefault()
@@ -94,32 +85,10 @@ const cargarTabla = () => {
 
 }
 
-const eliminarProducto = (id,numero) => {
-
-    if (numero === 0) {
-       let posicion =  categorias.findIndex((categoria)=>{
-            return categoria.id === id
-        })
-
-        categorias.splice(posicion,1)
-        localStorage.setItem("categorias",JSON.stringify(categorias))
-
-    } else if(numero === 1) {
-       let pos = juegos.findIndex((juego)=>{
-            return juego.id === id
-        })
-
-        juegos.splice(pos,1)
-        localStorage.setItem("juegos",JSON.stringify(juegos))
-        cargarTabla()
-    }
-
-}
-
 
 const añadirARecomendados = (index) => {
   
-    if (recomendados.length >= 5 && juegos[index].recomendado == false) {
+    if (recomendados.length >= 6 && juegos[index].recomendado == false) {
         alert("No tiene mas espacio para agregar a recomendados")
     } else {
         juegos[index].recomendado = !juegos[index].recomendado;
@@ -134,45 +103,5 @@ const destacarJuego = (index) => {
         localStorage.setItem("juegos",JSON.stringify(juegos))
         cargarTabla()
   }
-
-const verCategorias = () => {
-
-    let modalCategorias = document.getElementById("categorias-modal")
-    myModal2.show()
-
-    categorias.forEach((categoria)=>{
-        let contenedor = document.createElement("div")
-        let contenido = `
-        <div class="d-flex mb-2 justify-content-between">
-        <h5> ${categoria.nombre} </h5>
-        <div class="d-flex align-items-center">
-        <i class="fa-solid fa-trash fa-xl puntero" onclick="eliminarProducto(${categoria.id},${0})"></i><p class="align-items-center mb-0">Eliminar categoria</p>
-        </div>
-        </div>
-        <hr/>
-        `
-        contenedor.innerHTML=contenido
-        modalCategorias.append(contenedor)
-    })
-}
-
-const crearCategoria = () => {
-    myModal.show()
-
-    let idCategoria = new Date().getTime()
-    let nombre = document.getElementById("nombre-categoria").value
-    let descripcion = document.getElementById("descripcion-categoria").value
-
-    if (nombre !== "" && descripcion !== "" ) {
-    let categoria = new Categoria(idCategoria,nombre,descripcion)
-    categorias.push(categoria)
-    categorias=JSON.parse(localStorage.getItem("categorias")) 
-    localStorage.setItem("categorias",JSON.stringify(categorias))
-
-    document.getElementById("nombre-categoria").value=""
-    document.getElementById("descripcion-categoria").value=""
-    }  
-  }
-
 
 cargarTabla()
