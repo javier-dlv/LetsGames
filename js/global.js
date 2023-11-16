@@ -29,33 +29,65 @@ class Categoria {
  let principal = JSON.parse(localStorage.getItem("principal")) || []
  let categorias = JSON.parse(localStorage.getItem("categorias")) || []
 
+
 const mostrarJuegosRecomendados = () => {
   let recomendadosJuegos = juegos.filter((juego)=> {
     return juego.recomendado == true
   })
-
   localStorage.setItem("recomendados",JSON.stringify(recomendadosJuegos))
   JSON.parse(localStorage.getItem("recomendados"))
 
-recomendados.forEach(juego => {
-    let columna = document.createElement("div")
-    columna.classList="col-12 col-md-3 mb-3 justify-content-center d-flex"
+  let carouselIner = document.getElementById("carousel-inner")
 
-    let cardJuego = `<div class="card h-100" style="width: 18rem;">
-    <div class="cont-img">
-    <img src="${juego.imagen}" class="card-img-top img-card" alt="imagen">
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">${juego.nombre}</h5>
-      <h5 class="card-text">${juego.precio} Usd</h5>
-      <a href="#" class="btn ">Ver detalle</a>
-    </div>
-  </div>`
+  for (let i = 0; i < recomendados.length; i+=4) {
+    
+    let carouselItem = document.createElement("div")
+    carouselItem.classList="carousel-item"
+    
+    if (i === 0) {
+      carouselItem.classList.add('active');
+    }
 
-  columna.innerHTML=cardJuego
-  juegosRecomendados.append(columna )
-});
+    let row = document.createElement('div');
+    row.classList.add('row');
+
+    for (let j = i; j < i + 4 && j < recomendados.length; j++) {
+     
+      let col = document.createElement('div');
+          col.classList.add('col-3');
+
+          let img = document.createElement('img');
+          img.src = recomendados[j].imagen;
+          img.classList.add('d-block', 'w-100');
+
+          col.appendChild(img);
+          row.appendChild(col);
+      
+    }
+    carouselItem.appendChild(row);
+    carouselIner.appendChild(carouselItem);
+  }
+
+// recomendados.forEach(juego => {
+//     let columna = document.createElement("div")
+//     columna.classList="col-12 col-md-2 mb-3 justify-content-center d-flex col-juego"
+
+//     let cardJuego = `<div class="card h-100" style="width: 18rem;">
+//     <div class="cont-img">
+//     <img src="${juego.imagen}" class="card-img-top img-card" alt="imagen">
+//     </div>
+//     <div class="card-body">
+//       <p class="card-title">${juego.nombre}</p>
+//       <h5 class="card-text">${juego.precio} Usd</h5>
+//       <a href="#" class="btn ">Ver detalle</a>
+//     </div>
+//   </div>`
+
+//   columna.innerHTML=cardJuego
+//   juegosRecomendados.append(columna )
+// });
 }
+
 
 const juegoPrincipal = () => {
   let principalJuego = juegos.filter((juego)=> {

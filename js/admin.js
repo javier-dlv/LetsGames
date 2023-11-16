@@ -88,7 +88,7 @@ const cargarTabla = () => {
 
 const añadirARecomendados = (index) => {
   
-    if (recomendados.length >= 6 && juegos[index].recomendado == false) {
+    if (recomendados.length >= 8 && juegos[index].recomendado == false) {
         alert("No tiene mas espacio para agregar a recomendados")
     } else {
         juegos[index].recomendado = !juegos[index].recomendado;
