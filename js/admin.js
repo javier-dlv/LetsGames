@@ -60,7 +60,7 @@ const cargarTabla = () => {
                     <hr/>
                     <div class="opciones">
                     <div class="d-flex align-items-center">
-                    <i class="fa-solid fa-pen-to-square fa-xl"></i><p class="align-items-center mb-0">Editar</p>
+                    <i class="fa-solid fa-pen-to-square fa-xl text-dark"></i><p class="align-items-center mb-0">Editar</p>
                     </div>
                     <div class="d-flex align-items-center">
                     <i class="fa-solid fa-trash fa-xl" onclick="eliminarProducto(${juego.id},${1})"></i><p class="align-items-center mb-0">Eliminar</p>
@@ -103,5 +103,6 @@ const destacarJuego = (index) => {
         localStorage.setItem("juegos",JSON.stringify(juegos))
         cargarTabla()
   }
+  
 
 cargarTabla()

@@ -1,7 +1,8 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(4, 4, 74);
+    background-color: rgb(31, 31, 32);
     color: white;
+    overflow-x: hidden;
 }
 
 .cursor{
@@ -26,11 +27,6 @@ body{
     object-fit: cover;
 }
 
-.card-principal{
-    border: 2px solid black;
-    max-height: 350px;
-}
-
 .card-pricipal-body{
     max-height: 350px;
 }
@@ -41,35 +37,41 @@ body{
     object-fit: cover;
 }
 
+/* CAROUSEL */
+
 .carousel-inner{
-    height: 130px;
+    height: 300px;
     display: flex;
     align-items: center;
 }
 
-.carousel-inner img {
-    width: 30%;
-    margin: 10px;
+.card-img-top{
+    height: 50%;
+    width: 100%;
+}
+ .carousel-control-prev{
+    display: contents;
+ }
+
+ .carousel-control-next{
+    display: contents;
+ }
+
+.carousel-inner img:hover{
+    font-size: large;
 }
 
-#carouselExample .carousel-control-prev,
-  #carouselExample .carousel-control-next {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
 /*TARJETAS*/
 
-.col-juego{
-    width: 230px;
-}
-
 .cont-img{
-    height: 42%;
-    
+    height: 40%;
+    width: 100%;
 }
 
 .img-card{
     height: 100%;
+    width: 100%;
+    margin: 0px;
 }
 
 .card-body{
@@ -78,16 +80,20 @@ body{
     justify-content: space-around;
 }
 
+.fondo-botones{
+    background-color: #FFBB5C;
+}
+
 .card-body a{
     background-color: #FFBB5C;
 }
 
 .card-body a:hover{
     background-color: #FFBB5C;
-}
+} 
 
 
-.todos-juegos{
+/* .todos-juegos{
     background-color: #FFBB5C;
 }
 

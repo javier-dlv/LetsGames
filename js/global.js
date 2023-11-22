@@ -24,11 +24,13 @@ class Categoria {
 
  let selectCategoria = document.getElementById("categoria")
 
- 
+juegos = JSON.parse(localStorage.getItem("juegos")) || [] 
  let recomendados = JSON.parse(localStorage.getItem("recomendados")) || []
  let principal = JSON.parse(localStorage.getItem("principal")) || []
  let categorias = JSON.parse(localStorage.getItem("categorias")) || []
-
+ let juegosAccion = JSON.parse(localStorage.getItem("Accion")) || []
+ let juegosAventura = JSON.parse(localStorage.getItem("Aventura")) || []
+ 
 
 const mostrarJuegosRecomendados = () => {
   let recomendadosJuegos = juegos.filter((juego)=> {
@@ -54,13 +56,20 @@ const mostrarJuegosRecomendados = () => {
     for (let j = i; j < i + 4 && j < recomendados.length; j++) {
      
       let col = document.createElement('div');
-          col.classList.add('col-3');
+          col.classList=('col-3');
 
-          let img = document.createElement('img');
-          img.src = recomendados[j].imagen;
-          img.classList.add('d-block', 'w-100');
+          let card = `<div class="card h-100">
+               <div class="cont-img">
+               <img src="${recomendados[j].imagen}" class="card-img-top img-card" alt="imagen">
+               </div>
+               <div class="card-body">
+               <p class="card-title">${recomendados[j].nombre}</p>
+               <h5 class="card-text">${recomendados[j].precio} Usd</h5>
+               <a href="#" class="btn ">Ver detalle</a>
+               </div>
+               </div>`
 
-          col.appendChild(img);
+          col.innerHTML=card
           row.appendChild(col);
       
     }
@@ -99,7 +108,7 @@ const juegoPrincipal = () => {
 
   principal.forEach((juego=>{
    let columna = document.createElement("div")
-   columna.classList=" d-none d-md-flex"
+   columna.classList="col-md-11 d-none d-md-flex ms-5"
    let contenido = `
    <div class="col-md-6">
      <div class="img-principal">
@@ -203,20 +212,13 @@ const eliminarProducto = (id,numero) => {
 const listarCategorias = () => {
   categorias.forEach((categoria)=>{
     let columna = document.createElement("div")
-    columna.classList="col"
+    columna.classList="col-12 col-md-4 mb-3"
 
-    let cardCategoria = `  <div class="card mb-3" style="max-width: 540px;">
-    <div class="row g-0">
-      <div class="col-md-4">
-        <img src="$}" class="img-fluid rounded-start" alt="...">
-      </div>
-      <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-          <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-        </div>
-      </div>
+    let cardCategoria = ` <div class="card h-100">
+    <div class="card-body">
+      <h4 class="card-title btn-danger">${categoria.nombre}</h4>
+      <p class="card-text">Entre aqui para ver todos los juegos que tenemos de ${categoria.nombre}</p>
+      <button type="button" class="btn fondo-botones">Entrar</button>
     </div>
   </div>`
 
@@ -225,4 +227,146 @@ const listarCategorias = () => {
   })
 }
 
+
+let juegosDeAccion = juegos.filter((juego)=>{
+  return juego.categoria === "Accion"
+})
+localStorage.setItem("Accion",JSON.stringify(juegosDeAccion))
+JSON.parse(localStorage.getItem("Accion"))
+
+let listarJuegosDeAccion = () => {
+
+  let carouselInerAccion = document.getElementById("carousel-inner-accion")
+
+  for (let i = 0; i < juegosAccion.length; i+=4) {
+    
+    let carouselItem = document.createElement("div")
+    carouselItem.classList="carousel-item"
+    
+    if (i === 0) {
+      carouselItem.classList.add('active');
+    }
+
+    let row = document.createElement('div');
+    row.classList.add('row');
+
+    for (let j = i; j < i + 4 && j < juegosAccion.length; j++) {
+     
+      let col = document.createElement('div');
+          col.classList=('col-6 col-md-3 d-flex');
+
+          let card = `<div class="card h-100">
+               <div class="cont-img">
+               <img src="${juegosAccion[j].imagen}" class="card-img-top img-card" alt="imagen">
+               </div>
+               <div class="card-body">
+               <p class="card-title">${juegosAccion[j].nombre}</p>
+               <h5 class="card-text">${juegosAccion[j].precio} Usd</h5>
+               <a href="#" class="btn ">Ver detalle</a>
+               </div>
+               </div>`
+
+          col.innerHTML=card
+          row.appendChild(col);
+      
+    }
+    carouselItem.appendChild(row);
+    carouselInerAccion.appendChild(carouselItem);
+  }
+}
+
+
+let listarJuegosDeAccionCelular = () => {
+  let juegosAccionCelular = document.getElementById("juegos-accion-celular")
+  juegosAccion.forEach(juego => {
+  let columna = document.createElement("div")
+   columna.classList="col-6 mb-3 justify-content-center d-flex"
+      
+   let cardJuego = `<div class="card h-100" style="width: 18rem;">
+   <div class="cont-img">
+   <img src="${juego.imagen}" class="card-img-top img-card" alt="imagen">
+   </div>
+   <div class="card-body">
+     <p class="card-title">${juego.nombre}</p>
+     <h5 class="card-text">${juego.precio} Usd</h5>
+     <a href="#" class="btn ">Ver detalle</a>
+   </div>
+ </div>`
+      
+ columna.innerHTML=cardJuego
+ juegosAccionCelular.append(columna )
+   });
+  
+     }
+
+    let juegosDeAventura = juegos.filter((juego)=>{
+      return juego.categoria === "Aventura"
+    })
+    localStorage.setItem("Aventura",JSON.stringify(juegosDeAventura))
+    JSON.parse(localStorage.getItem("Aventura"))
+
+
+    let listarJuegosDeAventura = () => {
+      let carouselInerAventura = document.getElementById("carousel-inner-aventura")
+
+  for (let i = 0; i < juegosAventura.length; i+=4) {
+    
+    let carouselItem = document.createElement("div")
+    carouselItem.classList="carousel-item"
+    
+    if (i === 0) {
+      carouselItem.classList.add('active');
+    }
+
+    let row = document.createElement('div');
+    row.classList.add('row');
+
+    for (let j = i; j < i + 4 && j < juegosAventura.length; j++) {
+     
+      let col = document.createElement('div');
+          col.classList=('col-6 col-md-3 d-flex');
+
+          let card = `<div class="card h-100">
+               <div class="cont-img">
+               <img src="${juegosAventura[j].imagen}" class="card-img-top img-card" alt="imagen">
+               </div>
+               <div class="card-body">
+               <p class="card-title">${juegosAventura[j].nombre}</p>
+               <h5 class="card-text">${juegosAventura[j].precio} Usd</h5>
+               <a href="#" class="btn ">Ver detalle</a>
+               </div>
+               </div>`
+
+          col.innerHTML=card
+          row.appendChild(col);
+      
+    }
+    carouselItem.appendChild(row);
+    carouselInerAventura.appendChild(carouselItem);
+  }
+    }
+
+
+  let listarJuegosDeAventuraCelular = () => {
+    let juegosAventuraCelular = document.getElementById("juegos-aventura-celular")
+  juegosAventura.forEach(juego => {
+  let columna = document.createElement("div")
+   columna.classList="col-6 mb-3 justify-content-center d-flex"
+      
+   let cardJuego = `<div class="card h-100" style="width: 18rem;">
+   <div class="cont-img">
+   <img src="${juego.imagen}" class="card-img-top img-card" alt="imagen">
+   </div>
+   <div class="card-body">
+     <p class="card-title">${juego.nombre}</p>
+     <h5 class="card-text">${juego.precio} Usd</h5>
+     <a href="#" class="btn ">Ver detalle</a>
+   </div>
+ </div>`
+      
+ columna.innerHTML=cardJuego
+ juegosAventuraCelular.append(columna )
+   });
+  
+  }
 agregarASelectCategoria()
